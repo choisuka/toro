@@ -30,8 +30,10 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
 .toro-big{font-size:6rem;display:block;animation:toroFloat 3s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(74,222,128,.4))}
 @keyframes toroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .toro-level{position:absolute;bottom:-4px;right:-8px;background:var(--yellow);color:#713f12;font-family:'Jua',sans-serif;font-size:.72rem;padding:3px 8px;border-radius:20px;font-weight:700}
-.home-title{font-size:2rem;background:linear-gradient(135deg,#4ade80,#86efac,#fde68a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
-.home-sub{color:var(--muted);font-size:.9rem}
+.home-title{font-size:2rem;background:linear-gradient(135deg,#4ade80,#86efac,#fde68a,#4ade80);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;animation:titleShimmer 3s linear infinite}
+@keyframes titleShimmer{0%{background-position:0%}100%{background-position:200%}}
+.home-sub{color:var(--muted);font-size:.9rem;animation:subtlePulse 4s ease-in-out infinite}
+@keyframes subtlePulse{0%,100%{opacity:.55}50%{opacity:.85}}
 
 /* 진행 바 */
 .progress-wrap{padding:0 24px;margin-bottom:20px}
@@ -57,7 +59,9 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
 /* 버튼 */
 .btn{display:block;width:calc(100% - 40px);margin:0 auto;padding:16px;border:none;border-radius:50px;font-family:'Jua',sans-serif;font-size:1.1rem;cursor:pointer;transition:transform .2s,box-shadow .2s;text-align:center}
 .btn:active{transform:scale(.97)}
-.btn-green{background:linear-gradient(135deg,#16a34a,#4ade80);color:#fff;box-shadow:0 4px 20px rgba(74,222,128,.35)}
+.btn-green{background:linear-gradient(135deg,#16a34a,#4ade80);color:#fff;box-shadow:0 4px 20px rgba(74,222,128,.35);animation:btnBounce 2.8s ease-in-out infinite}
+@keyframes btnBounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.02)}}
+.btn-green:active{animation:none;transform:scale(.97)}
 .btn-green:hover{box-shadow:0 6px 28px rgba(74,222,128,.5)}
 .btn-yellow{background:linear-gradient(135deg,#d97706,#fde68a);color:#713f12;box-shadow:0 4px 20px rgba(253,230,138,.35)}
 .btn-ghost{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.15)}
@@ -75,7 +79,7 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
 .story-day-badge{background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.3);color:var(--green);font-family:'Jua',sans-serif;font-size:.8rem;padding:5px 12px;border-radius:20px}
 .story-body{padding:24px 20px}
 .story-emoji{font-size:3rem;margin-bottom:16px;display:block;text-align:center}
-.story-title{font-size:1.5rem;font-family:'Jua',sans-serif;text-align:center;margin-bottom:20px;color:var(--yellow)}
+.story-title{font-size:1.5rem;font-family:'Jua',sans-serif;text-align:center;margin-bottom:20px;color:var(--yellow);animation:titleShimmer 4s linear infinite;background:linear-gradient(135deg,#fde68a,#fbbf24,#fde68a);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .story-text{font-size:1rem;line-height:2.1;color:rgba(240,253,240,.9);white-space:pre-line;background:rgba(255,255,255,.04);border-radius:var(--radius);padding:20px;border:1px solid rgba(255,255,255,.07)}
 .story-text em{color:var(--green2);font-style:normal;font-weight:700}
 .story-next{margin-top:24px}
@@ -107,7 +111,7 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
 .complete-body{padding:40px 20px;text-align:center}
 .complete-anim{font-size:5rem;display:block;margin-bottom:16px;animation:completePop .6s ease-out}
 @keyframes completePop{0%{transform:scale(0)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
-.complete-title{font-size:1.6rem;font-family:'Jua',sans-serif;margin-bottom:8px;color:var(--yellow)}
+.complete-title{font-size:1.6rem;font-family:'Jua',sans-serif;margin-bottom:8px;animation:titleShimmer 2.5s linear infinite;background:linear-gradient(135deg,#fde68a,#4ade80,#86efac,#fde68a);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .complete-sub{color:var(--muted);margin-bottom:28px;font-size:.9rem}
 .piece-earned{display:inline-flex;align-items:center;gap:10px;background:rgba(253,230,138,.1);border:1px solid rgba(253,230,138,.3);border-radius:50px;padding:10px 20px;margin-bottom:28px}
 .piece-earned span{font-family:'Jua',sans-serif;color:var(--yellow)}
@@ -138,6 +142,36 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
 /* 반짝이 효과 */
 .sparkle{position:fixed;pointer-events:none;z-index:100;font-size:1.5rem;animation:sparkleFly 1.2s ease-out forwards}
 @keyframes sparkleFly{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0)}}
+
+/* ── 감정숲 지도 ── */
+.map-body{padding:16px 12px 20px}
+.map-intro{font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:16px}
+.map-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:360px;margin:0 auto}
+.map-node{aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);cursor:pointer;position:relative;transition:transform .2s}
+.map-node:active{transform:scale(.93)}
+.map-node.done{border-color:var(--green);background:rgba(74,222,128,.15);box-shadow:0 0 10px rgba(74,222,128,.2)}
+.map-node.today{border-color:var(--yellow);background:rgba(253,230,138,.15);box-shadow:0 0 14px rgba(253,230,138,.4);animation:pulsePiece 1.5s ease-in-out infinite}
+.map-node.locked{opacity:.28;cursor:default}
+.map-node-emoji{font-size:1.15rem;display:block;line-height:1}
+.map-node-day{font-size:.58rem;color:var(--muted);font-family:'Jua',sans-serif;margin-top:2px}
+.map-node.done .map-node-day{color:var(--green)}
+.map-node.today .map-node-day{color:var(--yellow)}
+.map-tooltip{position:fixed;background:rgba(10,24,10,.97);border:1px solid rgba(74,222,128,.35);border-radius:14px;padding:11px 15px;font-size:.82rem;color:var(--text);max-width:190px;z-index:200;pointer-events:none;display:none;line-height:1.6}
+
+/* ── 기부 화면 ── */
+.donate-body{padding:32px 20px}
+.donate-big{font-size:4.5rem;text-align:center;display:block;margin-bottom:14px}
+.donate-title{font-size:1.45rem;font-family:'Jua',sans-serif;margin-bottom:10px;color:var(--yellow);text-align:center}
+.donate-sub{color:var(--muted);font-size:.88rem;line-height:2;margin-bottom:24px;text-align:center}
+.donate-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:18px 20px;margin-bottom:24px}
+.donate-card-label{font-size:.74rem;color:var(--green);font-family:'Jua',sans-serif;letter-spacing:1px;margin-bottom:10px}
+.donate-card-text{font-size:.86rem;line-height:2;color:rgba(240,253,240,.78)}
+.donate-btns{display:flex;flex-direction:column;gap:12px}
+.btn-donate{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;border:none;border-radius:50px;font-family:'Jua',sans-serif;font-size:1rem;cursor:pointer;text-decoration:none;transition:transform .2s;text-align:center}
+.btn-donate:active{transform:scale(.97)}
+.btn-kakao{background:#fee500;color:#3c1e1e}
+.btn-toss{background:#0064ff;color:#fff}
+.btn-share{background:rgba(255,255,255,.08);color:var(--text);border:1px solid rgba(255,255,255,.15)}
 </style>
 </head>
 <body>
@@ -179,7 +213,9 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
 
   <div class="bottom-nav">
     <button class="nav-btn active" onclick="showScreen('home')">🏠 홈</button>
+    <button class="nav-btn" onclick="showScreen('map')">🗺️ 지도</button>
     <button class="nav-btn" onclick="showScreen('log')">📖 기록</button>
+    <button class="nav-btn" onclick="showScreen('donate')">💝 후원</button>
   </div>
 </div>
 
@@ -283,7 +319,70 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
   </div>
   <div class="bottom-nav">
     <button class="nav-btn" onclick="showScreen('home')">🏠 홈</button>
+    <button class="nav-btn" onclick="showScreen('map')">🗺️ 지도</button>
     <button class="nav-btn active" onclick="showScreen('log')">📖 기록</button>
+    <button class="nav-btn" onclick="showScreen('donate')">💝 후원</button>
+  </div>
+</div>
+
+<!-- ── 감정숲 지도 ── -->
+<div class="screen" id="map">
+  <div class="story-header">
+    <button class="back-btn" onclick="showScreen('home')">←</button>
+    <div class="story-day-badge">🗺️ 감정숲 지도</div>
+  </div>
+  <div class="map-body">
+    <p class="map-intro">💚 완료한 날 · ⭐ 오늘 · ○ 앞으로 남은 여정</p>
+    <div class="map-grid" id="map-grid"></div>
+  </div>
+  <div id="map-tooltip" class="map-tooltip"></div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="showScreen('home')">🏠 홈</button>
+    <button class="nav-btn active" onclick="showScreen('map')">🗺️ 지도</button>
+    <button class="nav-btn" onclick="showScreen('log')">📖 기록</button>
+    <button class="nav-btn" onclick="showScreen('donate')">💝 후원</button>
+  </div>
+</div>
+
+<!-- ── 기부 ── -->
+<div class="screen" id="donate">
+  <div class="story-header">
+    <button class="back-btn" onclick="showScreen('home')">←</button>
+    <div class="story-day-badge">💝 개발자 응원하기</div>
+  </div>
+  <div class="donate-body">
+    <span class="donate-big">🦕💝</span>
+    <h2 class="donate-title">토로와 함께해 주셔서 감사해요!</h2>
+    <p class="donate-sub">이 앱은 완전 무료예요.<br>커피 한 잔을 선물해주시면<br>더 좋은 앱을 만드는 데 큰 힘이 돼요 ☕</p>
+    <div class="donate-card">
+      <div class="donate-card-label">🌳 우리 아이 행복 프로젝트</div>
+      <div class="donate-card-text">
+        ❤️ 내사랑 — 부모 감정 관리<br>
+        🌤️ 행복한 하루 — 날씨 문화 큐레이션<br>
+        🌳 토로의 감정숲 — 아이 감정 교육 30일<br>
+        🚀 과학 탐험대 — 아이 과학 영상 + 퀴즈<br>
+        🏰 수학왕국 — 초등 수학 게임
+      </div>
+    </div>
+    <div class="donate-btns">
+      <!-- TODO: 카카오페이 링크를 아래 href에 입력하세요 -->
+      <a class="btn-donate btn-kakao" href="#" onclick="alert('링크를 설정해주세요 💛');return false">
+        💛 카카오페이로 응원하기
+      </a>
+      <!-- TODO: 토스 링크를 아래 href에 입력하세요 (예: https://toss.me/아이디) -->
+      <a class="btn-donate btn-toss" href="#" onclick="alert('링크를 설정해주세요 💙');return false">
+        💙 토스로 응원하기
+      </a>
+      <button class="btn-donate btn-share" onclick="shareApp()">
+        📤 앱 공유하기
+      </button>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="showScreen('home')">🏠 홈</button>
+    <button class="nav-btn" onclick="showScreen('map')">🗺️ 지도</button>
+    <button class="nav-btn" onclick="showScreen('log')">📖 기록</button>
+    <button class="nav-btn active" onclick="showScreen('donate')">💝 후원</button>
   </div>
 </div>
 
@@ -955,8 +1054,9 @@ function showScreen(name){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(name).classList.add('active');
   window.scrollTo(0,0);
-  if(name==='home') renderHome();
-  if(name==='log')  renderLog();
+  if(name==='home')   renderHome();
+  if(name==='log')    renderLog();
+  if(name==='map')    renderMap();
 }
 
 // ══════════════════════════════════════════
@@ -1104,6 +1204,56 @@ function renderLog(){
       </div>
       <div class="log-emotion-icon">${EMOTIONS[l.emotion]||'💚'}</div>
     </div>`).reverse().join('');
+}
+
+// ══════════════════════════════════════════
+//  감정숲 지도
+// ══════════════════════════════════════════
+function renderMap(){
+  const cur = Math.min(state.currentDay, 30);
+  const grid = document.getElementById('map-grid');
+  grid.innerHTML = '';
+  for(let row=0; row<6; row++){
+    const days=[];
+    for(let col=0;col<5;col++) days.push(row*5+col+1);
+    if(row%2===1) days.reverse(); // 지그재그
+    days.forEach(d=>{
+      if(d>30) return;
+      const day = DAYS[d-1];
+      const isDone = state.logs.some(l=>l.day===d);
+      const isCur  = d===cur && !isDone;
+      const el=document.createElement('div');
+      el.className='map-node'+(isDone?' done':isCur?' today':' locked');
+      el.innerHTML=`<span class="map-node-emoji">${day.emoji}</span><span class="map-node-day">${d}</span>`;
+      if(isDone||isCur) el.onclick=()=>showMapTooltip(el,day,d);
+      grid.appendChild(el);
+    });
+  }
+}
+
+let tooltipTimer=null;
+function showMapTooltip(el,day,d){
+  const tt=document.getElementById('map-tooltip');
+  tt.innerHTML=`<strong>Day ${d}</strong> ${day.emoji}<br>${day.title}<br><span style="font-size:.75rem;color:var(--muted)">${day.theme}</span>`;
+  const rect=el.getBoundingClientRect();
+  tt.style.left=Math.min(rect.left, window.innerWidth-210)+'px';
+  tt.style.top=Math.max(rect.top-90, 10)+'px';
+  tt.style.display='block';
+  clearTimeout(tooltipTimer);
+  tooltipTimer=setTimeout(()=>tt.style.display='none',2500);
+}
+
+// ══════════════════════════════════════════
+//  앱 공유
+// ══════════════════════════════════════════
+function shareApp(){
+  const url='https://choisuka.github.io/toro/';
+  if(navigator.share){
+    navigator.share({title:'토로의 감정숲 모험',text:'아이와 함께하는 30일 감정 교육 앱!',url});
+  } else {
+    navigator.clipboard?.writeText(url);
+    alert('링크가 복사됐어요! 친구에게 공유해보세요 💚');
+  }
 }
 
 // ══════════════════════════════════════════
