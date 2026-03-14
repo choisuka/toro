@@ -143,6 +143,19 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
 .sparkle{position:fixed;pointer-events:none;z-index:100;font-size:1.5rem;animation:sparkleFly 1.2s ease-out forwards}
 @keyframes sparkleFly{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-80px) scale(0)}}
 
+/* ── 30일 가이드 ── */
+.guide-toggle{display:block;width:calc(100% - 40px);margin:0 auto 8px;padding:13px;border:1px solid rgba(74,222,128,.25);border-radius:50px;background:rgba(74,222,128,.07);color:var(--green);font-family:'Jua',sans-serif;font-size:.95rem;cursor:pointer;transition:all .2s;text-align:center}
+.guide-toggle:hover{background:rgba(74,222,128,.14)}
+.guide-wrap{display:none;padding:4px 16px 16px}
+.guide-wrap.open{display:block}
+.guide-week{margin-bottom:14px}
+.guide-week-header{font-family:'Jua',sans-serif;font-size:.8rem;color:var(--yellow);background:rgba(253,230,138,.08);border:1px solid rgba(253,230,138,.2);border-radius:10px;padding:7px 14px;margin-bottom:6px}
+.guide-row{display:grid;grid-template-columns:52px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.guide-row:last-child{border-bottom:none}
+.guide-day{font-family:'Jua',sans-serif;font-size:.75rem;color:var(--green);padding-top:2px;line-height:1.5}
+.guide-story{font-size:.83rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.guide-tip{font-size:.76rem;color:var(--muted);line-height:1.65}
+
 /* ── 감정숲 지도 ── */
 .map-body{padding:16px 12px 20px}
 .map-intro{font-size:.85rem;color:var(--muted);text-align:center;margin-bottom:16px}
@@ -210,6 +223,9 @@ h1,h2,h3,h4,.jua{font-family:'Jua',sans-serif}
 
   <button class="btn btn-green" id="start-btn" onclick="startAdventure()">🦕 오늘의 모험 시작!</button>
   <button class="btn btn-ghost" style="margin-top:12px" onclick="showScreen('log')">📖 모험 기록 보기</button>
+
+  <button class="guide-toggle" id="guide-toggle-btn" onclick="toggleGuide()">📋 30일 완성 가이드 보기 ▾</button>
+  <div class="guide-wrap" id="guide-wrap"></div>
 
   <div class="bottom-nav">
     <button class="nav-btn active" onclick="showScreen('home')">🏠 홈</button>
@@ -1196,6 +1212,82 @@ function renderLog(){
       </div>
       <div class="log-emotion-icon">${EMOTIONS[l.emotion]||'💚'}</div>
     </div>`).reverse().join('');
+}
+
+// ══════════════════════════════════════════
+//  30일 가이드
+// ══════════════════════════════════════════
+const WEEKS=[
+  {label:'1주차',theme:'내 마음의 이름 찾기',from:1,to:7},
+  {label:'2주차',theme:'함께하는 마음의 힘',from:8,to:14},
+  {label:'3주차',theme:'흔들려도 괜찮은 마음',from:15,to:21},
+  {label:'4주차',theme:'용기와 마지막 조각',from:22,to:30}
+];
+const DESC=[
+  '색이 바뀌는 감정 몬스터를 만나요.',
+  '무지개 열매를 루루와 나눠 먹어요.',
+  '도토리가 굴러가 화가 난 토로.',
+  '가방을 잃어버린 루루 옆에 그냥 앉아줘요.',
+  '어두운 동굴에서 친구들의 목소리를 들어요.',
+  '흔들다리 앞에서 겁이 난 토로.',
+  '달리기 시합을 하다 다투고 화해해요.',
+  '부러진 다리를 조각조각 함께 맞춰요.',
+  '지도를 적셨지만 숨겨진 길을 찾아요.',
+  '열매가 익을 때까지 꾹 참고 기다려요.',
+  '구름을 보며 토끼와 고래를 찾아내요.',
+  '길을 알려준 새들에게 "고마워"라고 해요.',
+  '가족 바위에서 엄마 아빠를 그리워해요.',
+  '느린 거북이 모모를 앞지르지 않고 기다려요.',
+  '폭포 물에 젖었지만 하하호호 웃어버려요.',
+  '강풍이 불 땐 바람의 방향을 따라 걸어요.',
+  '호수에 비친 별들을 보며 소원을 빌어요.',
+  '모양도 색깔도 다른 동물들이 모여 살아요.',
+  '눈을 감고 물소리에만 집중해서 길을 찾아요.',
+  '100년 된 나무가 "천천히 자라도 돼"라고 해요.',
+  '빛나는 나무를 만나는 꿈을 꾸고 일어나요.',
+  '아찔한 절벽을 친구와 손잡고 올라가요.',
+  '넘어져서 아프지만 툭툭 털고 일어나요.',
+  '안개가 가득한 숲에서 길을 찾아내요.',
+  '돌멩이 하나로 멋진 장난감을 만들어요.',
+  '미끄러진 친구에게 먼저 손을 내밀어요.',
+  '아껴둔 열매를 배고픈 새에게 선물해요.',
+  '나무의 빛이 보이기 시작하자 힘이 나요.',
+  '30일간의 지도가 완성되는 순간이에요.',
+  '나무가 환해지며 우리 안의 빛을 발견해요.'
+];
+
+let guideOpen=false;
+function toggleGuide(){
+  guideOpen=!guideOpen;
+  const wrap=document.getElementById('guide-wrap');
+  const btn=document.getElementById('guide-toggle-btn');
+  if(guideOpen){
+    wrap.classList.add('open');
+    btn.textContent='📋 30일 완성 가이드 닫기 ▴';
+    if(!wrap.innerHTML) renderGuide();
+  } else {
+    wrap.classList.remove('open');
+    btn.textContent='📋 30일 완성 가이드 보기 ▾';
+  }
+}
+
+function renderGuide(){
+  const wrap=document.getElementById('guide-wrap');
+  wrap.innerHTML=WEEKS.map(w=>`
+    <div class="guide-week">
+      <div class="guide-week-header">${w.label} · ${w.theme}</div>
+      ${Array.from({length:w.to-w.from+1},(_,i)=>{
+        const d=w.from+i;
+        const day=DAYS[d-1];
+        return `<div class="guide-row">
+          <div class="guide-day">${day.emoji}<br>Day ${d}</div>
+          <div>
+            <div class="guide-story">${DESC[d-1]}</div>
+            <div class="guide-tip">💡 ${day.tip}</div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`).join('');
 }
 
 // ══════════════════════════════════════════
